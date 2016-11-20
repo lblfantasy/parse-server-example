@@ -709,9 +709,9 @@ Parse.Cloud.define('scoretotal', function(req, res) {
   data: { alert: "Broadcast to everyone"}
 }, { useMasterKey: true })
 .then(function() {
-  // Push sent!
+  console.log("WORKED!");
 }, function(error) {
-  // There was a problem :(
+  console.log("PROBLEM!");
 });
 
 	
