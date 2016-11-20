@@ -705,7 +705,7 @@ Parse.Cloud.define('scoretotal', function(req, res) {
 
 	
 	Parse.Push.send({
-  where: {query},
+  where: query,
   data: { alert: "Broadcast to everyone"}
 }, { useMasterKey: true })
 .then(function() {
