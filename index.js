@@ -10,6 +10,12 @@ if (!databaseUri) {
 
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  push: {
+    android: {
+      senderId: '843186377993', // The Sender ID of GCM
+      apiKey: 'AIzaSyDy6BWd9df-SGI1Jvlq-dC101VY0ZAA_gs' // The Server API Key of GCM
+    }
+  },
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   fileKey: process.env.FILE_KEY || 'b49e7a8a-3b2a-49ae-9e34-b010a7540e52',
   appId: process.env.APP_ID || 'myAppId',
