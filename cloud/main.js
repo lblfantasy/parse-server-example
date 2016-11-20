@@ -1,3 +1,6 @@
+
+
+
 Parse.Cloud.define('resetMoney', function(req, res) {
  
 	
@@ -697,6 +700,21 @@ var counter = 0;
 Parse.Cloud.define('scoretotal', function(req, res) {
  
 	var totalEff = 0;
+	
+	var query = new Parse.Query(Parse.Installation);
+
+	
+	Parse.Push.send({
+  where: {query},
+  data: { alert: "Broadcast to everyone"}
+}, { useMasterKey: true })
+.then(function() {
+  // Push sent!
+}, function(error) {
+  // There was a problem :(
+});
+
+	
 	 var userQuery = new Parse.Query('Player');
 	
 	userQuery.limit(1000);
