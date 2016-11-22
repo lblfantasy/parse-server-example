@@ -15,12 +15,17 @@ var api = new ParseServer({
       senderId: '843186377993', // The Sender ID of GCM
       apiKey: 'AIzaSyAqy7-ZCGhnvnM4M6fZUJMLuH_QEvvKZsQ' // The Server API Key of GCM
     },
-      ios: {
+      ios: [{
         pfx: 'LBLFantasyiOSCertificate.p12',
         passphrase: '', // optional password to your p12/PFX
         bundleId: 'BRICS.LBLFantasyLeagues',
         production: true
+      }, {
+        pfx: 'LBLDevCert.p12', // Prod PFX or P12
+        bundleId: 'BRICS.LBLFantasyLeagues',  
+        production: false // Prod
       }
+            ]
     
   },
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
