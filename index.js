@@ -1,3 +1,9 @@
+
+
+
+// Example express application adding the parse-server module to expose Parse
+// compatible API routes.
+
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
@@ -10,7 +16,6 @@ if (!databaseUri) {
 
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
-
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   fileKey: process.env.FILE_KEY || 'b49e7a8a-3b2a-49ae-9e34-b010a7540e52',
   appId: process.env.APP_ID || 'myAppId',
@@ -52,3 +57,4 @@ httpServer.listen(port, function() {
 
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer);
+
