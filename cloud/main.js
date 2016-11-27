@@ -987,7 +987,15 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   });
 		
 	}
-		    if(confirmationRounds[currentNumber] === 1){
+		   
+    
+     
+      
+  
+	   }
+	   
+	   console.log('Ok boys its ' + totalScoreRound);
+	    if(confirmationRounds[currentNumber] === 1){
 		  totalScoreRound = totalScoreRound + 5;
 	  }
 	  totalScoreRound = (totalScoreRound.toFixed(2))/1;
@@ -1009,11 +1017,6 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	    
    
      userData.save(null, { useMasterKey: true });
-    
-     
-      
-  
-	   }
     
    }
    
