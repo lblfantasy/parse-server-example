@@ -947,7 +947,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     queryPlayer.containedIn("Name",playersInThisRound);
     
     queryPlayer.find({
-  success: function(results) {
+  success: function(results2) {
  
   
    var totalScore = 0;
@@ -988,6 +988,8 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
       userData.set('HistoryRoundScore',historyRounds);
       
        console.log('Im balling ' + statUser);
+	  
+	     results2.success();
    
      userData.save(null, { useMasterKey: true });
   
