@@ -985,6 +985,30 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   });
 		
 	}
+		    if(confirmationRounds[currentNumber] === 1){
+		  totalScoreRound = totalScoreRound + 5;
+	  }
+	  totalScoreRound = (totalScoreRound.toFixed(2))/1;
+	   historyRounds[currentNumber] = totalScoreRound;
+      userData.set('LastScore',totalScoreRound);
+     
+	  var parsetotalScore = 0;
+	    for (var k = 0; k < historyRounds.length; k++) {
+		    parsetotalScore += historyRounds[k];
+	    }
+	  
+	  parsetotalScore = (parsetotalScore.toFixed(2))/1;
+     
+      userData.set('TotalScore',parsetotalScore);
+      userData.set('HistoryRoundScore',historyRounds);
+      
+       console.log('Im balling ' + statUser);
+	  
+	    
+   
+     userData.save(null, { useMasterKey: true });
+    
+     
       
   
 	   }
