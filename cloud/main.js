@@ -907,20 +907,24 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
  
   
   var totalScoreRound;
-  
-  res.success(currentRound);
+
  
   var userQuery = new Parse.Query('_User');
-  userQuery.equalTo('StatUser','zouzoux')
+userQuery.limit(1000);
+	userQuery.equalTo('CloudPassed',false);
+  
   
   
   userQuery.find({
   success: function(results) {
  
+	   var counter = 0;
   
    for (var z = 0; z < results.length; z++) {
   
     var userData = results[z];
+	   counter++;
+	   userData.set('CloudPassed',true);
    var bonusStateArray = userData.get('BonusEachRound');
    var bonusThisRound = bonusStateArray[currentNumber];
    var historyRounds = userData.get('HistoryRoundScore');
@@ -979,6 +983,8 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
      userData.save(null, { useMasterKey: true });
   
   },
+	    
+	    
 
   error: function(error) {
     // error is an instance of Parse.Error.
@@ -1180,9 +1186,11 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     
      
    }
-	  
+	   res.success(counter);  
   
   },
+	  
+	  
 
   error: function(error) {
     // error is an instance of Parse.Error.
