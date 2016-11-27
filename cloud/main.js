@@ -916,8 +916,8 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	userQuery.equalTo('CloudPassed',false);
   
   
-  userQuery.find({
-  success: function(results) {
+  userQuery.find().then(
+  function(results) {
  
 	   var counter = 0;
   
@@ -1205,8 +1205,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	  
 	  
 
-  error: function(error) {
+   function(error) {
     // error is an instance of Parse.Error.
-  }
-}); 
+  }); 
 });
