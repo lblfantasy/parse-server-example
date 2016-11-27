@@ -906,7 +906,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
  
   
-  var totalScoreRound;
+  var totalScoreRound =0;
 
  
   var userQuery = new Parse.Query('_User');
@@ -946,14 +946,15 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
    
      var queryPlayer = new Parse.Query('Player');
   
-	 var totalScore = 0;
+	
 	for(var l=0;l<playersInThisRound.length; l++){
 		queryPlayer.equalTo('Name',playersInThisRound[l]);
 		
 		queryPlayer.find().then(
   function(results) {
  
-  
+   var totalScore = totalScoreRound;
+	  
    for (var i = 0; i < results.length; i++) {
   
     var userData2 = results[i];
