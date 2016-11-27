@@ -947,13 +947,13 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     queryPlayer.containedIn("Name",playersInThisRound);
     
      queryPlayer.find().then(
-  function(results) {
+  function(results2) {
  
   
    var totalScore = 0;
-   for (var i = 0; i < results.length; i++) {
+   for (var i = 0; i < results2.length; i++) {
   
-    var userData2 = results[i];
+    var userData2 = results2[i];
     var namePlayer = userData2.get('Name');
     var playerScore = userData2.get(currentRound);
     if(namePlayer === playersInThisRound[0]){
