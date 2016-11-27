@@ -925,7 +925,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
     var userData = results[z];
 	   counter++;
-	   userData.set('CloudPassed',true);
+	   
    var bonusStateArray = userData.get('BonusEachRound');
    var bonusThisRound = bonusStateArray[currentNumber];
    var historyRounds = userData.get('HistoryRoundScore');
@@ -979,6 +979,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
      
       userData.set('TotalScore',parsetotalScore);
       userData.set('HistoryRoundScore',historyRounds);
+      userData.set('CloudPassed',true);
       
    
      userData.save(null, { useMasterKey: true });
