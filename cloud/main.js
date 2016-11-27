@@ -954,8 +954,10 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   function(results) {
  
   
-   var userData2 = results[0];
-    var namePlayer == userData2.get('Name');
+   for (var i = 0; i < results.length; i++) {
+  
+    var userData2 = results[i];
+    var namePlayer = userData2.get('Name');
     var playerScore = userData2.get(currentRound);
     if(namePlayer === playersInThisRound[0]){
         playerScore = playerScore * 1.2;
@@ -967,6 +969,10 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	   
     totalScoreRound = totalScore;
 	   console.log(totalScoreRound +' ZIZOUUUU');
+    
+    
+     
+   }
  
 	
   
