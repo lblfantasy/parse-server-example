@@ -1011,7 +1011,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
 	   }
     
-    
+   }
    
      
    }else if(bonusThisRound === 1){
@@ -1202,11 +1202,11 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     // error is an instance of Parse.Error.
   }
 });
-		     }
+ }
     
-    
+  
      
-   }
+   
 	   res.success(counter);  
   
   },
