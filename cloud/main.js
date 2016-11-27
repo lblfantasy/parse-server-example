@@ -946,8 +946,8 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
      var queryPlayer = new Parse.Query('Player');
     queryPlayer.containedIn("Name",playersInThisRound);
     
-    queryPlayer.find({
-  success: function(results2) {
+     queryPlayer.find().then(
+  function(results) {
  
   
    var totalScore = 0;
@@ -997,10 +997,10 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	    
 	    
 
-  error: function(error) {
+   function(error) {
     // error is an instance of Parse.Error.
-  }
-});
+  });
+  
 	   }
     
     
