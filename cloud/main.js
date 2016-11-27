@@ -944,17 +944,20 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 		   var confirmationRounds = userData.get('ConfirmRound');
    
      var queryPlayer = new Parse.Query('Player');
-    queryPlayer.containedIn("Name",playersInThisRound);
-    
-     queryPlayer.find().then(
-  function(results2) {
+  
+	 var totalScore = 0;
+	for(var l=0;l<playersInThisRound.length; l++){
+		queryPlayer.equalTo("Name",playersInThisRound[l]);
+		
+		queryPlayer.find().then(
+  function(results) {
  
   
-   var totalScore = 0;
-   for (var i = 0; i < results2.length; i++) {
   
-    var userData2 = results2[i];
-    var namePlayer = userData2.get('Name');
+   for (var i = 0; i < results.length; i++) {
+  
+    var userData2 = results[i];
+    var namePlayer == userData2.get('Name');
     var playerScore = userData2.get(currentRound);
     if(namePlayer === playersInThisRound[0]){
         playerScore = playerScore * 1.2;
@@ -970,6 +973,17 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     
      
    }
+	
+  
+  },
+	    
+	    
+
+   function(error) {
+    // error is an instance of Parse.Error.
+  });
+		
+	}
 	  if(confirmationRounds[currentNumber] === 1){
 		  totalScoreRound = totalScoreRound + 5;
 	  }
@@ -992,14 +1006,8 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	    
    
      userData.save(null, { useMasterKey: true });
-  
-  },
-	    
-	    
-
-   function(error) {
-    // error is an instance of Parse.Error.
-  });
+    
+     
   
 	   }
     
