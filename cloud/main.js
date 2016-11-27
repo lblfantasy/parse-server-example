@@ -943,7 +943,71 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	   }else{
 	
     
+        var confirmationRounds = userData.get('ConfirmRound');
+   
+     var queryPlayer = new Parse.Query('Player');
+  
+	 var totalScore = 0;
+	for(var l=0;l<playersInThisRound.length; l++){
+		queryPlayer.equalTo('Name',playersInThisRound[l]);
+		
+		queryPlayer.find().then(
+  function(results) {
+ 
+  
+  
+   for (var i = 0; i < results.length; i++) {
+  
+    var userData2 = results[i];
+    var namePlayer == userData2.get('Name');
+    var playerScore = userData2.get(currentRound);
+    if(namePlayer === playersInThisRound[0]){
+        playerScore = playerScore * 1.2;
+    }
+    totalScore = totalScore + playerScore;
+    
+    
+	   
+	   
+    totalScoreRound = totalScore;
+	   console.log(totalScoreRound +' ZIZOUUUU');
+    
+    
      
+   }
+	
+  
+  },
+	    
+	    
+
+   function(error) {
+    // error is an instance of Parse.Error.
+  });
+		
+	}
+	  if(confirmationRounds[currentNumber] === 1){
+		  totalScoreRound = totalScoreRound + 5;
+	  }
+	  totalScoreRound = (totalScoreRound.toFixed(2))/1;
+	   historyRounds[currentNumber] = totalScoreRound;
+      userData.set('LastScore',totalScoreRound);
+     
+	  var parsetotalScore = 0;
+	    for (var k = 0; k < historyRounds.length; k++) {
+		    parsetotalScore += historyRounds[k];
+	    }
+	  
+	  parsetotalScore = (parsetotalScore.toFixed(2))/1;
+     
+      userData.set('TotalScore',parsetotalScore);
+      userData.set('HistoryRoundScore',historyRounds);
+      
+       console.log('Im balling ' + statUser);
+	  
+	    
+   
+     userData.save(null, { useMasterKey: true });
   
 	   }
     
@@ -967,5 +1031,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     // error is an instance of Parse.Error.
   }); 
 });
+
+
 
 
