@@ -938,8 +938,8 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     var playersInThisRound = userData.get(currentRoundPlayer); 
 	   if (playersInThisRound.length === 0 ){
 		   console.log('Round1 is Zero');
-	   }
-    var confirmationRounds = userData.get('ConfirmRound');
+	   }else{
+		   var confirmationRounds = userData.get('ConfirmRound');
    
      var queryPlayer = new Parse.Query('Player');
     queryPlayer.containedIn("Name",playersInThisRound);
@@ -997,6 +997,8 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     // error is an instance of Parse.Error.
   }
 });
+	   }
+    
     
    
      
