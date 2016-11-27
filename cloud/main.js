@@ -989,7 +989,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
       
        console.log('Im balling ' + statUser);
 	  
-	     results2.success();
+	    
    
      userData.save(null, { useMasterKey: true });
   
