@@ -975,26 +975,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     
      
    }
- 
-	
-  
-  },
-	    
-	    
-
-   function(error) {
-    // error is an instance of Parse.Error.
-  });
-		
-	}
-		   
-    
-     
-      
-  
-	   }
-	   
-	   console.log('Ok boys its ' + totalScoreRound);
+	     console.log('Ok boys its ' + totalScoreRound);
 	    if(confirmationRounds[currentNumber] === 1){
 		  totalScoreRound = totalScoreRound + 5;
 	  }
@@ -1017,6 +998,26 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	    
    
      userData.save(null, { useMasterKey: true });
+ 
+	
+  
+  },
+	    
+	    
+
+   function(error) {
+    // error is an instance of Parse.Error.
+  });
+		
+	}
+		   
+    
+     
+      
+  
+	   }
+	   
+	
     
    }
    
