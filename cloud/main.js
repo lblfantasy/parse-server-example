@@ -936,6 +936,9 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     
     
     var playersInThisRound = userData.get(currentRoundPlayer); 
+	   if (playersInThisRound.length === 0 ){
+		   console.log('Round1 is Zero');
+	   }
     var confirmationRounds = userData.get('ConfirmRound');
    
      var queryPlayer = new Parse.Query('Player');
