@@ -1014,7 +1014,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
    }
    
      
-   }else if(bonusThisRound === 1){
+   else if(bonusThisRound === 1){
 	    console.log('Shakiraaaaa');
 	   var playersInThisRound = userData.get(currentRoundPlayer);
 	    var confirmationRounds = userData.get('ConfirmRound');
