@@ -964,6 +964,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
         playerScore = playerScore * 1.2;
     }
     totalScore = totalScore + playerScore;
+	   console.log('Tout est possible' + totalScore);
     
     
 	   
