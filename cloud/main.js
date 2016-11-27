@@ -896,3 +896,76 @@ Parse.Cloud.define('automaticConfirmation', function(req, res) {
 });
 
 
+Parse.Cloud.define('computeScoreRound', function(req, res) {
+  var currentRoundPlayer = req.params.currentRoundPlayer
+  var currentRound = req.params.currentRound
+  var currentNumber = req.params.currentNumber
+  
+  
+ 
+  
+ 
+  
+  var totalScoreRound;
+
+ 
+  var userQuery = new Parse.Query('_User');
+
+	userQuery.limit(2);
+ 
+	userQuery.equalTo('CloudPassed',false);
+  
+  
+  userQuery.find().then(
+  function(results) {
+ 
+	   var counter = 0;
+  
+   for (var z = 0; z < results.length; z++) {
+  
+    var userData = results[z];
+	   counter++;
+	   
+   var bonusStateArray = userData.get('BonusEachRound');
+	   var statUser = userData.get('StatUser');
+	   console.log('Stat user is ' + statUser);
+   var bonusThisRound = bonusStateArray[currentNumber];
+   var historyRounds = userData.get('HistoryRoundScore');
+	   userData.set('CloudPassed',true);
+   
+   if (bonusThisRound === 0 || bonusThisRound === 5){
+    
+    
+    var playersInThisRound = userData.get(currentRoundPlayer); 
+	   if (playersInThisRound.length === 0 ){
+		   console.log('Round1 is Zero');
+		    userData.save(null, { useMasterKey: true });
+	   }else{
+	
+    
+     
+  
+	   }
+    
+   }
+   
+     
+  
+
+ 
+   }
+  
+     
+   
+	   res.success(counter);  
+  
+  },
+	  
+	  
+
+   function(error) {
+    // error is an instance of Parse.Error.
+  }); 
+});
+
+
