@@ -912,8 +912,8 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   var userQuery = new Parse.Query('_User');
 
 	
-  userQuery.limit(10);
-	userQuery.equalTo('CloudPassed',false);
+ 
+	userQuery.equalTo('Statuser','MarcoTer');
   
   
   userQuery.find({
