@@ -987,7 +987,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
       userData.set('TotalScore',parsetotalScore);
       userData.set('HistoryRoundScore',historyRounds);
       
-      
+       console.log('Im balling ' + statUser);
    
      userData.save(null, { useMasterKey: true });
   
