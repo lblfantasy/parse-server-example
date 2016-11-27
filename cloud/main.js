@@ -913,7 +913,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 
 	
  
-	userQuery.equalTo('StatUser','MarcoTer');
+	userQuery.equalTo('StatUser','aznavour');
   
   
   userQuery.find({
