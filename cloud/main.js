@@ -911,7 +911,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
  
   var userQuery = new Parse.Query('_User');
 
-	userQuery.equalTo('StatUser','kevinn');
+	userQuery.equalTo('StatUser','carl1');
   
   
   
