@@ -949,11 +949,12 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
      var queryPlayer = new Parse.Query('Player');
   
 	console.log(playersInThisRound.length);
+		   var usernameToBeSaved = userData[z];
 	for(var l=0;l<playersInThisRound.length; l++){
 		queryPlayer.equalTo('Name',playersInThisRound[l]);
 		
 	   
-		var usernameToBeSaved = userData[z];
+		
 		queryPlayer.find().then(
   function(results2) {
  
