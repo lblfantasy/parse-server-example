@@ -954,9 +954,6 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	for(var l=0;l<playersInThisRound.length; l++){
 		queryPlayer.equalTo('Name',playersInThisRound[l]);
 		
-		  if(l === playersInThisRound.length - 1 ){
-		   console.log('Yo for Real');
-		   switchLight = true;
 	   }
 		
 		queryPlayer.find().then(
@@ -976,6 +973,10 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	   console.log('Tout est possible' + totalScore);
     
     
+		  if(i === results2.length - 1 ){
+		   console.log('Yo for Real' + i);
+		   switchLight = true;
+		  }
 	 
 	   
     totalScoreRound = totalScore;
