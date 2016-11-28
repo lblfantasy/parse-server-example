@@ -958,13 +958,13 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
 	console.log(playersInThisRound.length);
 		   
-	for(var l=0;l<playersInThisRound.length; l++){
-		queryPlayer.equalTo('Name',playersInThisRound[l]);
+	
+		queryPlayer.containedIn('Name',playersInThisRound);
 		
 	   
 		
-		queryPlayer.find().then(
-  function(results2) {
+		queryPlayer.find({
+  success: function(results2) {
  
    var totalScore = totalScoreRound;
 	  
@@ -993,21 +993,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
    }
 	  
 	  
-	    
- 
-	
-  
-  },
-	    
-	    
-
-   function(error) {
-    // error is an instance of Parse.Error.
-  });
-		
-	}
-		   
-		    console.log('Ok boys its ' + totalScoreRound);
+	   	    console.log('Ok boys its ' + totalScoreRound);
 	    if(confirmationRounds[currentNumber] === 1){
 		  totalScoreRound = totalScoreRound + 5;
 	  }
@@ -1032,6 +1018,21 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	    
    
      userDataUser.save(null, { useMasterKey: true });   
+ 
+	
+  
+  },
+	    
+	    
+
+   error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+		});
+		
+	
+		   
+	 
 		
 		   
     
