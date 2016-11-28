@@ -902,7 +902,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   var currentNumber = req.params.currentNumber
   
   
- 
+ var switchLight = true;
   
  
   
@@ -923,6 +923,9 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
    for (var z = 0; z < results.length; z++) {
   
+	   while(switchLight === false){
+	   }
+	   switchLight = false;
     var userData = results[z];
 	   counter++;
 	   
@@ -967,7 +970,10 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	   console.log('Tout est possible' + totalScore);
     
     
-	   
+	   if(i === results.length -1 ){
+		   console.log('Yo for Real');
+		   switchLight = true;
+	   }
 	   
     totalScoreRound = totalScore;
 	   console.log(totalScoreRound +' ZIZOUUUU');
@@ -975,7 +981,24 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     
      
    }
-	     console.log('Ok boys its ' + totalScoreRound);
+	  
+	  
+	   
+ 
+	
+  
+  },
+	    
+	    
+
+   function(error) {
+    // error is an instance of Parse.Error.
+  });
+		
+	}
+		   
+		   
+		     console.log('Ok boys its ' + totalScoreRound);
 	    if(confirmationRounds[currentNumber] === 1){
 		  totalScoreRound = totalScoreRound + 5;
 	  }
@@ -998,18 +1021,6 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	    
    
      userData.save(null, { useMasterKey: true });
- 
-	
-  
-  },
-	    
-	    
-
-   function(error) {
-    // error is an instance of Parse.Error.
-  });
-		
-	}
 		   
     
      
