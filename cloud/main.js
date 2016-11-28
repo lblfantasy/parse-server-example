@@ -901,8 +901,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   var currentRound = req.params.currentRound
   var currentNumber = req.params.currentNumber
   
-  
- var switchLight = true;
+
   
  
   
@@ -923,9 +922,8 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
    for (var z = 0; z < results.length; z++) {
   
-	   while(switchLight === false){
-	   }
-	   switchLight = false;
+	  
+	  
     var userData = results[z];
 	   counter++;
 	   
@@ -973,10 +971,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	   console.log('Tout est possible' + totalScore);
     
     
-		  if(i === results2.length - 1 ){
-		   console.log('Yo for Real' + i);
-		   switchLight = true;
-		  }
+		
 	 
 	   
     totalScoreRound = totalScore;
