@@ -949,7 +949,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	   if (playersInThisRound.length === 0 ){
 		   console.log('Round1 is Zero');
 		    
-		    userData.save(null, { useMasterKey: true });
+		    userDataUser.save(null, { useMasterKey: true });
 	   }else{
 	
  var confirmationRounds = userDataUser.get('ConfirmRound');
