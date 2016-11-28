@@ -934,7 +934,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	   console.log('Stat user is ' + statUser);
    var bonusThisRound = bonusStateArray[currentNumber];
    var historyRounds = userData.get('HistoryRoundScore');
-	   userData.set('CloudPassed',true);
+ 	   userData.set('CloudPassed',true);
    
    if (bonusThisRound === 0 || bonusThisRound === 5){
     
@@ -955,7 +955,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 		queryPlayer.equalTo('Name',playersInThisRound[l]);
 		
 	   
-		
+		var usernameToBeSaved = userData[z];
 		queryPlayer.find().then(
   function(results2) {
  
@@ -1008,7 +1008,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	  }
 	  totalScoreRound = (totalScoreRound.toFixed(2))/1;
 	   historyRounds[currentNumber] = totalScoreRound;
-      userData.set('LastScore',totalScoreRound);
+      usernameToBeSaved.set('LastScore',totalScoreRound);
      
 	  var parsetotalScore = 0;
 	    for (var k = 0; k < historyRounds.length; k++) {
@@ -1017,14 +1017,14 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	  
 	  parsetotalScore = (parsetotalScore.toFixed(2))/1;
      
-      userData.set('TotalScore',parsetotalScore);
-      userData.set('HistoryRoundScore',historyRounds);
+      usernameToBeSaved.set('TotalScore',parsetotalScore);
+      usernameToBeSaved.set('HistoryRoundScore',historyRounds);
       
        console.log('Im balling ' + statUser);
 	  
 	    
    
-     userData.save(null, { useMasterKey: true });
+     usernameToBeSaved.save(null, { useMasterKey: true });
 		   
     
      
