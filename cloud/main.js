@@ -999,8 +999,10 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
      
       usernameToBeSaved.set('TotalScore',parsetotalScore);
       usernameToBeSaved.set('HistoryRoundScore',historyRounds);
+	  
+	  var theStat =  usernameToBeSaved.get('StatUser');
       
-       console.log('Im balling ' + statUser);
+       console.log('Im balling ' + theStat);
 	  
 	    
    
