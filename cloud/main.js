@@ -910,7 +910,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
  
   var userQuery = new Parse.Query('_User');
 
-	userQuery.limit(50);
+	userQuery.limit(2);
  
 	userQuery.equalTo('CloudPassed',false);
   
