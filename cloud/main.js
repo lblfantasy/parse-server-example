@@ -948,7 +948,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     var playersInThisRound = userDataUser.get(currentRoundPlayer); 
 	   if (playersInThisRound.length === 0 ){
 		   console.log('Round1 is Zero');
-		    switchLight = true;
+		    
 		    userData.save(null, { useMasterKey: true });
 	   }else{
 	
@@ -975,10 +975,12 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     var playerScore = userData2.get(currentRound);
     if(namePlayer === playersInThisRound[0]){
         playerScore = playerScore * 1.2;
+	    
     }
     totalScore = totalScore + playerScore;
 	   console.log('Tout est possible' + totalScore);
     
+	    console.log('player Is' + totalScore ' and score is ' + playerScore);
     
 		
 	 
