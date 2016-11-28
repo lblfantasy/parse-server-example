@@ -953,14 +953,19 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	for(var l=0;l<playersInThisRound.length; l++){
 		queryPlayer.equalTo('Name',playersInThisRound[l]);
 		
+		  if(l === playersInThisRound.length - 1 ){
+		   console.log('Yo for Real');
+		   switchLight = true;
+	   }
+		
 		queryPlayer.find().then(
-  function(results) {
+  function(results2) {
  
    var totalScore = totalScoreRound;
 	  
-   for (var i = 0; i < results.length; i++) {
+   for (var i = 0; i < results2.length; i++) {
   
-    var userData2 = results[i];
+    var userData2 = results2[i];
     var namePlayer = userData2.get('Name');
     var playerScore = userData2.get(currentRound);
     if(namePlayer === playersInThisRound[0]){
@@ -970,10 +975,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	   console.log('Tout est possible' + totalScore);
     
     
-	   if(i === results.length -1 ){
-		   console.log('Yo for Real');
-		   switchLight = true;
-	   }
+	 
 	   
     totalScoreRound = totalScore;
 	   console.log(totalScoreRound +' ZIZOUUUU');
