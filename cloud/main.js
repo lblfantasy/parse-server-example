@@ -936,6 +936,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 		nameQuery.find({
   success: function(resultsUser) {
 			  var userDataUser = resultsUser[0];
+	  console.log('User Is  ' + statUser);
 			   var bonusStateArray = userDataUser.get('BonusEachRound');
 			    var bonusThisRound = bonusStateArray[currentNumber];
    var historyRounds = userData.get('HistoryRoundScore');
