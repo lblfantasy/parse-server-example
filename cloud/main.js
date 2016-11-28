@@ -942,6 +942,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
     var playersInThisRound = userData.get(currentRoundPlayer); 
 	   if (playersInThisRound.length === 0 ){
 		   console.log('Round1 is Zero');
+		    switchLight = true;
 		    userData.save(null, { useMasterKey: true });
 	   }else{
 	
