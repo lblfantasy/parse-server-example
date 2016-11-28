@@ -948,7 +948,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
    
      var queryPlayer = new Parse.Query('Player');
   
-	
+	console.log(playersInThisRound.length);
 	for(var l=0;l<playersInThisRound.length; l++){
 		queryPlayer.equalTo('Name',playersInThisRound[l]);
 		
@@ -982,22 +982,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
    }
 	  
 	  
-	   
- 
-	
-  
-  },
-	    
-	    
-
-   function(error) {
-    // error is an instance of Parse.Error.
-  });
-		
-	}
-		   
-		   
-		     console.log('Ok boys its ' + totalScoreRound);
+	        console.log('Ok boys its ' + totalScoreRound);
 	    if(confirmationRounds[currentNumber] === 1){
 		  totalScoreRound = totalScoreRound + 5;
 	  }
@@ -1020,6 +1005,21 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	    
    
      usernameToBeSaved.save(null, { useMasterKey: true });
+ 
+	
+  
+  },
+	    
+	    
+
+   function(error) {
+    // error is an instance of Parse.Error.
+  });
+		
+	}
+		   
+		   
+		
 		   
     
      
