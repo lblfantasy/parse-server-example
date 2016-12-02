@@ -703,16 +703,6 @@ Parse.Cloud.define('scoretotal', function(req, res) {
 	
 	var query = new Parse.Query(Parse.Installation);
 
-	
-	Parse.Push.send({
-  where: query,
-  data: { alert: "Broadcast to everyone"}
-}, { useMasterKey: true })
-.then(function() {
-  console.log("WORKED!");
-}, function(error) {
-  console.log("PROBLEM!");
-});
 
 	
 	 var userQuery = new Parse.Query('Player');
