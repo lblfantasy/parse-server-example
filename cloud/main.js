@@ -871,7 +871,7 @@ Parse.Cloud.define('automaticConfirmation', function(req, res) {
 		console.log("No need to copy");
 	        userData.save(null, { useMasterKey: true });
 	}
-  }
+  },
   
   error: function(error) {
     // error is an instance of Parse.Error.
