@@ -813,8 +813,8 @@ Parse.Cloud.define('automaticConfirmation', function(req, res) {
   
   
    var userQuery = new Parse.Query('_User');
-	userQuery.limit(1000);
-	userQuery.equalTo('CloudPassed',false);
+	userQuery.limit(1);
+	userQuery.equalTo('username','zoukoum');
    
  
   
@@ -828,8 +828,14 @@ Parse.Cloud.define('automaticConfirmation', function(req, res) {
    for (var i = 0; i < results.length; i++) {
   
     var userData = results[i];
-	  
-    var previousRoundPlayer = userData.get(previousRound);
+	
+	  var statUser = userData.get('username');
+	  var nameQuery = new Parse.Query('_User');
+		nameQuery.equalTo('username',statUser);
+	   
+		nameQuery.find({
+  success: function(resultsUser) {
+	   var previousRoundPlayer = userData.get(previousRound);
     var currentRoundPlayers =  userData.get(currentRound);
     
     console.log(previousRoundPlayer[0] + 'WA7eCHHHHHH');
@@ -865,6 +871,14 @@ Parse.Cloud.define('automaticConfirmation', function(req, res) {
 		console.log("No need to copy");
 	        userData.save(null, { useMasterKey: true });
 	}
+  }
+  
+  error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+		});
+	  
+   
     
     
      
