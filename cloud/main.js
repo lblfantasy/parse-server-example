@@ -828,6 +828,7 @@ Parse.Cloud.define('automaticConfirmation', function(req, res) {
    for (var i = 0; i < results.length; i++) {
   
     var userData = results[i];
+	     counter ++;
 	
 	  var statUser = userData.get('username');
 	  var nameQuery = new Parse.Query('_User');
@@ -839,7 +840,7 @@ Parse.Cloud.define('automaticConfirmation', function(req, res) {
     var currentRoundPlayers =  userData.get(currentRound);
     
     console.log(previousRoundPlayer[0] + 'WA7eCHHHHHH');
-	    counter ++;
+	  
 	   
 	    userData.set('CloudPassed',true);
 	   
