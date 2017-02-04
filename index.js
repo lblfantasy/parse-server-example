@@ -16,7 +16,7 @@ if (!databaseUri) {
 
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
-  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
+  cloud: process.env.CLOUD_CODE_MAIN || __dirname + './cloud/main.js',
    push: {
     android: {
       senderId: '843186377993', // The Sender ID of GCM
