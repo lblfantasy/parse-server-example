@@ -1047,7 +1047,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
 	   }
 	   
-	
+	 res.success(counter); 
     
    } else  if (bonusThisRound === 1){
     
@@ -1151,7 +1151,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
 	   }
 	   
-	
+	 res.success(counter); 
     
    }else  if (bonusThisRound === 2){
     
@@ -1260,7 +1260,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
 	   }
 	   
-	
+	 res.success(counter); 
     
    }else  if (bonusThisRound === 3){
     
@@ -1385,7 +1385,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
 	   }
 	   
-	
+	 res.success(counter); 
     
    }else  if (bonusThisRound === 4){
     
@@ -1498,7 +1498,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
   
 	   }
 	   
-	
+	 res.success(counter); 
     
    }
 	   
