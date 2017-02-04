@@ -1255,12 +1255,12 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 		
 		   
     
-     
+      res.success(counter); 
       
   
 	   }
 	   
-	 res.success(counter); 
+	
     
    }else  if (bonusThisRound === 3){
     
