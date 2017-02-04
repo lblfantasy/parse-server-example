@@ -1049,7 +1049,7 @@ Parse.Cloud.define('computeScoreRound', function(req, res) {
 	   
 	 res.success(counter); 
     
-   
+	    }
   },
 	  
 	  
