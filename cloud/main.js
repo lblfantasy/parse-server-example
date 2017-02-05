@@ -660,7 +660,7 @@ Parse.Cloud.define('cloudPass', function(req, res) {
   var userQuery = new Parse.Query('_User');
 	userQuery.limit(1000);
 	
-	userQuery.equalTo('username','zoukoum');
+	userQuery.notEqualTo('CloudPassed',false);
 	
 	
 	 userQuery.find({
