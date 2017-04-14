@@ -69,7 +69,7 @@ Parse.Cloud.define('opX', function(req, res) {
 	  
 	  console.log(totalCounter);
 	  
-    res.success('I passed on ' + counter + ' users');
+    res.success(counter);
    
      
   
