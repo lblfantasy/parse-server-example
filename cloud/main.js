@@ -26,6 +26,7 @@ Parse.Cloud.define('opX', function(req, res) {
   
     var userData = results[i];
    
+	   var userN = userData.get("username");
 	   counter++
 	   var gPriceArr = userData.get("GuardsPrices");
 	   var gPrice = 0;
@@ -68,6 +69,7 @@ Parse.Cloud.define('opX', function(req, res) {
 	    totalCounter = counter;
 	  
 	  console.log(totalCounter);
+	  console.log(userN);
 	  
     res.success(counter);
    
