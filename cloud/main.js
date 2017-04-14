@@ -8,13 +8,13 @@ Parse.Cloud.define('opX', function(req, res) {
 	var  totalCounter;
 	var totalMoney = 80;
 	 var userQuery = new Parse.Query('_User');
-	userQuery.limit(1000);
+	userQuery.limit(1);
 	
 	
 	
 	
 	   
-		userQuery.equalTo("username","zoukoum");
+		userQuery.equalTo("CloudPassed",false);
 	
 	
 	 userQuery.find({
@@ -60,6 +60,7 @@ Parse.Cloud.define('opX', function(req, res) {
 	   
 	   
     userData.set("Money",totalMoney);
+    userData.set("CloudPassed",true);
     userData.save(null, { useMasterKey: true });
     
      
