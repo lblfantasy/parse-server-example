@@ -1,5 +1,86 @@
 
 
+Parse.Cloud.define('opX', function(req, res) {
+ 
+	
+
+	
+	var  totalCounter;
+	var totalMoney = 80;
+	 var userQuery = new Parse.Query('_User');
+	userQuery.limit(1000);
+	
+	
+	
+	
+	   
+		userQuery.equalTo("username","zoukoum");
+	
+	
+	 userQuery.find({
+  success: function(results) {
+ 
+   var  counter =0
+
+   for (var i = 0; i < results.length; i++) {
+  
+    var userData = results[i];
+   
+	   counter++
+	   var gPriceArr = userData.get("GuardsPrices");
+	   var gPrice = 0;
+
+	   for (var i = 0; i < gPriceArr.length; i++) {
+    	   gPrice += gPriceArr[i];
+		   
+    //Do something
+}
+	   
+	      var gFwdArr = userData.get("ForwardsPrices");
+	   var gFwd = 0;
+
+	   for (var i = 0; i < gFwdArr.length; i++) {
+    	   gFwd += gFwdArr[i];
+		   
+    //Do something
+}
+	   
+	      var gCenterArr = userData.get("CentersPrices");
+	   var gCenter = 0;
+
+	   for (var i = 0; i < gCenterArr.length; i++) {
+    	   gCenter += gCenterArr[i];
+		   
+    //Do something
+}
+	   
+	   totalMoney = totalMoney - (gPrice + gFwd + gCenter);
+	   
+	   totalMoney = Math.round(totalMoney * 100) / 100
+	   
+	   
+    userData.set("Money",totalMoney);
+    userData.save(null, { useMasterKey: true });
+    
+     
+   }
+	    totalCounter = counter;
+	  
+	  console.log(totalCounter);
+	  
+    res.success('I passed on ' + counter + ' users');
+   
+     
+  
+  },
+
+  error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+});	
+});
+	
+
 
 Parse.Cloud.define('resetMoney', function(req, res) {
  
