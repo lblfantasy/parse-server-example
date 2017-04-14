@@ -8,7 +8,7 @@ Parse.Cloud.define('opX', function(req, res) {
 	var  totalCounter;
 	var totalMoney = 80;
 	 var userQuery = new Parse.Query('_User');
-	userQuery.limit(300);
+	userQuery.limit(1);
 	
 	
 	
