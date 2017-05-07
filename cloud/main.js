@@ -928,7 +928,7 @@ Parse.Cloud.define('automaticConfirmation', function(req, res) {
 		      userData.save(null, { useMasterKey: true });
 		   
 	   }else if(previousRoundPlayer.length >5){
-		   for(var h = 0;  h< 5; h++){
+		   for(var h = 0;  h< previousRoundPlayer.length; h++){
 			currentRoundPlayers[h] = previousRoundPlayer[h];
 		   }
 		   
