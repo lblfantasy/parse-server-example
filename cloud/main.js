@@ -891,7 +891,7 @@ Parse.Cloud.define('automaticConfirmation', function(req, res) {
   
    var userQuery = new Parse.Query('_User');
 	userQuery.limit(1);
-	userQuery.equalTo('username','zoukoum');
+	userQuery.equalTo('CloudPassed',false);
    
  
   
