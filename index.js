@@ -42,13 +42,13 @@ var api = new ParseServer({
       // Your domain from mailgun.com 
       domain: 'lblfantasy.com',
       // Your API key from mailgun.com 
-      apiKey: 'key-mykey',
+      apiKey: 'key-1ab4bd482ab38e8ac4877c6684258454',
       // The template section 
       templates: {
         passwordResetEmail: {
           subject: 'Reset your password',
-          pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
-          pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
+          pathPlainText: __dirname + 'path/to/templates/password_reset_email.txt',
+          pathHtml: __dirname +  'path/to/templates/password_reset_email.html',
           callback: (user) => { return { firstName: user.get('firstName') }}
           // Now you can use {{firstName}} in your templates
       }
