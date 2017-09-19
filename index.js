@@ -35,6 +35,10 @@ var api = new ParseServer({
   appId: process.env.APP_ID || 'myAppId',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',
+   publicServerURL: 'http://lblfantasy.herokuapp.com/parse',
+  // Your apps name. This will appear in the subject and body of the emails that are sent.
+  appName: 'LBLFantasy',
+   emailAdapter: {
    module: 'parse-server-mailgun',
     options: {
       // The address that your emails come from 
@@ -53,7 +57,8 @@ var api = new ParseServer({
           // Now you can use {{firstName}} in your templates
       }
     }
-    },
+    }
+   },
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
