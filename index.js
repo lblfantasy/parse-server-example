@@ -52,6 +52,7 @@ var api = new ParseServer({
           callback: (user) => { return { firstName: user.get('firstName') }}
           // Now you can use {{firstName}} in your templates
       }
+    }
     },
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
