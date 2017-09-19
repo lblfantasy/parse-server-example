@@ -34,7 +34,25 @@ var api = new ParseServer({
   fileKey: process.env.FILE_KEY || 'b49e7a8a-3b2a-49ae-9e34-b010a7540e52',
   appId: process.env.APP_ID || 'myAppId',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',
+   module: 'parse-server-mailgun',
+    options: {
+      // The address that your emails come from 
+      fromAddress: 'LBLFantasy <noreply@lblfantasy.com>',
+      // Your domain from mailgun.com 
+      domain: 'lblfantasy.com',
+      // Your API key from mailgun.com 
+      apiKey: 'key-mykey',
+      // The template section 
+      templates: {
+        passwordResetEmail: {
+          subject: 'Reset your password',
+          pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
+          callback: (user) => { return { firstName: user.get('firstName') }}
+          // Now you can use {{firstName}} in your templates
+      }
+    },
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
