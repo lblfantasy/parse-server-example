@@ -47,10 +47,7 @@ var api = new ParseServer({
       domain: 'lblfantasy.com',
       // Your API key from mailgun.com 
       apiKey: 'key-1ab4bd482ab38e8ac4877c6684258454',
-      // The template section 
-      templates: {
-      
-    }
+     
     }
    },
   liveQuery: {
