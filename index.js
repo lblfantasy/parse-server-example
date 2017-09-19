@@ -49,13 +49,7 @@ var api = new ParseServer({
       apiKey: 'key-1ab4bd482ab38e8ac4877c6684258454',
       // The template section 
       templates: {
-        passwordResetEmail: {
-          subject: 'Reset your password',
-          pathPlainText: __dirname + 'path/to/templates/password_reset_email.txt',
-          pathHtml: __dirname +  'path/to/templates/password_reset_email.html',
-          callback: (user) => { return { firstName: user.get('firstName') }}
-          // Now you can use {{firstName}} in your templates
-      }
+      
     }
     }
    },
