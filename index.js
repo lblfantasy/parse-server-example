@@ -21,8 +21,8 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
    push: {
     android: {
-      senderId: '568782794177', // The Sender ID of GCM
-      apiKey: 'AIzaSyC7kXpg4DEjP6cs23tdps-pB_WtXUmRdDM' // The Server API Key of GCM
+      senderId: '843186377993', // The Sender ID of GCM
+      apiKey: 'AIzaSyDRT2IAqrpAvqFhxNkvoXvylyICXv8kQm0' // The Server API Key of GCM
     },
      ios: {
         pfx: 'LBLPushProd.p12',
