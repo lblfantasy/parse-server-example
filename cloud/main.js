@@ -82,6 +82,55 @@ Parse.Cloud.define('opX', function(req, res) {
   }
 });	
 });
+
+Parse.Cloud.define('daConfirm', function(req, res) {
+ 
+	 var myArray = new Array(50).fill(0);
+	myArray[0] = 1;
+	var columnName = req.params.roundNumbs;
+	
+	var  totalCounter;
+	 var userQuery = new Parse.Query('_User');
+	userQuery.limit(1000);
+	
+	
+	
+	
+	   
+		userQuery.notEqualTo(columnName,myArray);
+	
+	
+	 userQuery.find({
+  success: function(results) {
+ 
+   var  counter =0
+
+   for (var i = 0; i < results.length; i++) {
+  
+    var userData = results[i];
+   
+	   counter++
+    userData.set(columnName,myArray);
+    userData.save(null, { useMasterKey: true });
+    
+     
+   }
+	  
+	  totalCounter = counter;
+	  
+	  console.log(totalCounter);
+	  
+    res.success('I passed on ' + counter + ' users');
+   
+     
+  
+  },
+
+  error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+});	
+});
 	
 
 
