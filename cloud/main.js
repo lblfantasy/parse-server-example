@@ -827,6 +827,53 @@ var counter = 0;
 });
 
 
+Parse.Cloud.define('suka', function(req, res) {
+  var userQuery = new Parse.Query('_User');
+	userQuery.limit(1000);
+	
+	userQuery.notEqualTo('CloudPassed',true);
+	
+	
+	 userQuery.find({
+  success: function(results) {
+ 
+  
+ 
+var counter = 0;
+   for (var i = 0; i < results.length; i++) {
+  
+    var userData = results[i];
+    var theConfirmRound = userData.get('ConfirmRound');
+    var round1Players = userData.get('Round1Players');
+    var round2Players = userData.get('Round2Players');	
+    if(round1Players.length === 0){
+    	theConfirmRound[0] = 0;	
+    }
+    if(round2Players.length > 0){
+    	theConfirmRound[1] = 1;	
+    } 		   
+	   
+    userData.set('CloudPassed',true);
+    userData.set('ConfirmRound',theConfirmRound); 	   
+    userData.save(null, { useMasterKey: true });
+	   counter++;
+    
+     
+   }
+    res.success('I passed on '+counter + ' users');
+   
+     
+  
+  },
+
+  error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+});
+	
+	
+ 
+});
 
 
 
