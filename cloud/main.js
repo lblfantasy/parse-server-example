@@ -835,7 +835,6 @@ var bonusType = req.params.bonusType;
 	userQuery.limit(1000);
 	
 	userQuery.notEqualTo('CloudPassed',true);
-	userQuery.equalTo('username','zoukoum');
 	
 	
 	 userQuery.find({
