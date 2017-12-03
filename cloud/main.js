@@ -827,6 +827,50 @@ var counter = 0;
 });
 
 
+Parse.Cloud.define('bonusGiveAway', function(req, res) {
+var currentRound = req.params.currRound;
+var bonusType = req.params.bonusType;
+	
+  var userQuery = new Parse.Query('_User');
+	userQuery.limit(1000);
+	
+	userQuery.notEqualTo('CloudPassed',false);
+	userQuery.equalTo('username','zoukoum');
+	
+	
+	 userQuery.find({
+  success: function(results) {
+ 
+  
+ 
+var counter = 0;
+   for (var i = 0; i < results.length; i++) {
+  
+    var userData = results[i];
+    var confirmRound = userData.get("BonusEachRound");
+    confirmRound[currentRound] = bonusType;
+    userData.set('CloudPassed',false);
+    userData.save(null, { useMasterKey: true });
+	   counter++;
+    
+     
+   }
+    res.success('I passed on '+counter + ' users');
+   
+     
+  
+  },
+
+  error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+});
+	
+	
+ 
+});
+
+
 Parse.Cloud.define('suka', function(req, res) {
   var userQuery = new Parse.Query('_User');
 	userQuery.limit(1000);
