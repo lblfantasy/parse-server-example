@@ -834,7 +834,7 @@ var bonusType = req.params.bonusType;
   var userQuery = new Parse.Query('_User');
 	userQuery.limit(1000);
 	
-	userQuery.notEqualTo('CloudPassed',false);
+	userQuery.notEqualTo('CloudPassed',true);
 	userQuery.equalTo('username','zoukoum');
 	
 	
@@ -849,7 +849,7 @@ var counter = 0;
     var userData = results[i];
     var confirmRound = userData.get("BonusEachRound");
     confirmRound[currentRound] = bonusType;
-    userData.set('CloudPassed',false);
+    userData.set('CloudPassed',true);
     userData.save(null, { useMasterKey: true });
 	   counter++;
     
