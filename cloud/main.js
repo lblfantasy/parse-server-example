@@ -830,6 +830,7 @@ var counter = 0;
 Parse.Cloud.define('bonusGiveAway', function(req, res) {
 var currentRound = req.params.currRound;
 var bonusType = req.params.bonusType;
+	bonusType = parseInt(bonusType);
 	
   var userQuery = new Parse.Query('_User');
 	userQuery.limit(1000);
