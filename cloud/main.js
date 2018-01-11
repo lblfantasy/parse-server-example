@@ -182,6 +182,98 @@ Parse.Cloud.define('resetMoney', function(req, res) {
 });
 	  
 	  
+Parse.Cloud.define('automaticConfirmationTrue', function(req, res) {
+  var currentRound = req.params.currentRound
+  var previousRound = req.params.previousRound
+  
+  
+   var userQuery = new Parse.Query('_User');
+	userQuery.limit(1);
+	userQuery.equalTo('CloudPassed',true);
+   
+ 
+  
+ 
+   userQuery.find({
+  success: function(results) {
+ 
+  
+   var totalScore = 0;
+	  var counter = 0;
+   for (var i = 0; i < results.length; i++) {
+  
+    var userData = results[i];
+	     counter ++;
+	
+	  var statUser = userData.get('username');
+	  var nameQuery = new Parse.Query('_User');
+		nameQuery.equalTo('username',statUser);
+	   
+		nameQuery.find({
+  success: function(resultsUser) {
+	   var previousRoundPlayer = userData.get(previousRound);
+    var currentRoundPlayers =  userData.get(currentRound);
+    
+    console.log(previousRoundPlayer[0] + 'WA7eCHHHHHH' + 'and user ' + statUser );
+	  
+	   
+	    userData.set('CloudPassed',true);
+	   
+	 
+    if(currentRoundPlayers.length === 0){
+	    
+	      if(previousRoundPlayer.length === 0){
+		      userData.save(null, { useMasterKey: true });
+		   
+	   }else if(previousRoundPlayer.length >5){
+		   for(var h = 0;  h< previousRoundPlayer.length; h++){
+			currentRoundPlayers[h] = previousRoundPlayer[h];
+		   }
+		   
+		   userData.set('CloudPassed',true);
+		   userData.set(currentRound,currentRoundPlayers);
+       		  userData.save(null, { useMasterKey: true }); 
+		    
+		    }else{
+		  userData.set('CloudPassed',true);
+	   	  userData.set(currentRound,previousRoundPlayer);
+       		  userData.save(null, { useMasterKey: true });
+	   }
+	    
+	    
+		
+    
+    }else{
+		console.log("No need to copy");
+	        userData.save(null, { useMasterKey: true });
+	}
+  },
+  
+  error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+		});
+	  
+   
+    
+    
+     
+   }
+	  
+	   res.success(counter);
+   
+   
+     
+  
+  },
+
+  error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+});
+  
+  
+});
 	  
 
 
