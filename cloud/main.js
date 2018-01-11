@@ -333,6 +333,640 @@ Parse.Cloud.define('resetArray', function(req, res) {
 });	
 });
 
+Parse.Cloud.define('computeScoreRoundTrue', function(req, res) {
+  var currentRoundPlayer = req.params.currentRoundPlayer
+  var currentRound = req.params.currentRound
+  var currentNumber = req.params.currentNumber
+  
+
+  
+ 
+  
+  var totalScoreRound =0;
+
+ 
+  var userQuery = new Parse.Query('_User');
+
+	userQuery.limit(1);
+ 
+	userQuery.equalTo('CloudPassed',true);
+  
+  
+  userQuery.find().then(
+  function(results) {
+ 
+	   var counter = 0;
+  
+   for (var z = 0; z < results.length; z++) {
+  
+	  
+	  
+    var userData = results[z];
+	   counter++;
+	   
+ 
+	   var statUser = userData.get('username');
+	   
+	    var nameQuery = new Parse.Query('_User');
+		nameQuery.equalTo('username',statUser);
+	   
+		nameQuery.find({
+  success: function(resultsUser) {
+			  var userDataUser = resultsUser[0];
+	  console.log('User Is  ' + statUser);
+			   var bonusStateArray = userDataUser.get('BonusEachRound');
+			    var bonusThisRound = bonusStateArray[currentNumber];
+   var historyRounds = userData.get('HistoryRoundScore');
+ 	   userDataUser.set('CloudPassed',true);
+	   
+	   
+	    if (bonusThisRound === 0 || bonusThisRound === 5){
+    
+    
+    var playersInThisRound = userDataUser.get(currentRoundPlayer); 
+	   if (playersInThisRound.length === 0 ){
+		   console.log('Round1 is Zero');
+		    
+		    userDataUser.save(null, { useMasterKey: true });
+	   }else{
+	
+ var confirmationRounds = userDataUser.get('ConfirmRound');
+   
+     var queryPlayer = new Parse.Query('Player');
+  
+	console.log(playersInThisRound.length);
+		   
+	
+		queryPlayer.containedIn('Name',playersInThisRound);
+		
+	   
+		
+		queryPlayer.find({
+  success: function(results2) {
+ 
+   var totalScore = totalScoreRound;
+	  
+   for (var i = 0; i < results2.length; i++) {
+  
+    var userData2 = results2[i];
+    var namePlayer = userData2.get('Name');
+    var playerScore = userData2.get(currentRound);
+    if(namePlayer === playersInThisRound[0]){
+        playerScore = playerScore * 1.2;
+	    
+    }
+    totalScore = totalScore + playerScore;
+	   console.log('Tout est possible' + totalScore);
+    
+	    console.log('player Is ' + namePlayer + ' and score is ' + playerScore);
+    
+		
+	 
+	   
+    totalScoreRound = totalScore;
+	   console.log(totalScoreRound +' ZIZOUUUU');
+    
+    
+     
+   }
+	  
+	  
+	   	    console.log('Ok boys its ' + totalScoreRound);
+	    if(confirmationRounds[currentNumber] === 1){
+		  totalScoreRound = totalScoreRound + 5;
+	  }
+	  totalScoreRound = (totalScoreRound.toFixed(2))/1;
+	   historyRounds[currentNumber] = totalScoreRound;
+      userDataUser.set('LastScore',totalScoreRound);
+     
+	  var parsetotalScore = 0;
+	    for (var k = 0; k < historyRounds.length; k++) {
+		    parsetotalScore += historyRounds[k];
+	    }
+	  
+	  parsetotalScore = (parsetotalScore.toFixed(2))/1;
+     
+      userDataUser.set('TotalScore',parsetotalScore);
+      userDataUser.set('HistoryRoundScore',historyRounds);
+	  
+	  
+      
+       
+	  
+	    
+   
+     userDataUser.save(null, { useMasterKey: true });   
+ 
+	
+  
+  },
+	    
+	    
+
+   error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+		});
+		
+	
+		   
+	 
+		
+		   
+    
+     
+      
+  
+	   }
+	   
+	
+    
+   } else  if (bonusThisRound === 1){
+    
+    
+    var playersInThisRound = userDataUser.get(currentRoundPlayer); 
+	   if (playersInThisRound.length === 0 ){
+		   console.log('Round1 is Zero');
+		    
+		    userDataUser.save(null, { useMasterKey: true });
+	   }else{
+	
+ var confirmationRounds = userDataUser.get('ConfirmRound');
+   
+     var queryPlayer = new Parse.Query('Player');
+  
+	console.log(playersInThisRound.length);
+		   
+	
+		queryPlayer.containedIn('Name',playersInThisRound);
+		
+	   
+		
+		queryPlayer.find({
+  success: function(results2) {
+ 
+   var totalScore = totalScoreRound;
+	  
+   for (var i = 0; i < results2.length; i++) {
+  
+    var userData2 = results2[i];
+    var namePlayer = userData2.get('Name');
+    var playerScore = userData2.get(currentRound);
+    if(namePlayer === playersInThisRound[0]){
+        playerScore = playerScore * 1.2;
+	    
+    }
+	if(playerScore < 0){
+		playerScore = playerScore * -1;
+	}
+    totalScore = totalScore + playerScore;
+	   console.log('Tout est possible' + totalScore);
+    
+	    console.log('player Is ' + namePlayer + ' and score is ' + playerScore);
+    
+		
+	 
+	   
+    totalScoreRound = totalScore;
+	   console.log(totalScoreRound +' ZIZOUUUU');
+    
+    
+     
+   }
+	  
+	  
+	   	    console.log('Ok boys its ' + totalScoreRound);
+	    if(confirmationRounds[currentNumber] === 1){
+		  totalScoreRound = totalScoreRound + 5;
+	  }
+	  totalScoreRound = (totalScoreRound.toFixed(2))/1;
+	   historyRounds[currentNumber] = totalScoreRound;
+      userDataUser.set('LastScore',totalScoreRound);
+     
+	  var parsetotalScore = 0;
+	    for (var k = 0; k < historyRounds.length; k++) {
+		    parsetotalScore += historyRounds[k];
+	    }
+	  
+	  parsetotalScore = (parsetotalScore.toFixed(2))/1;
+     
+      userDataUser.set('TotalScore',parsetotalScore);
+      userDataUser.set('HistoryRoundScore',historyRounds);
+	  
+	  
+      
+       
+	  
+	    
+   
+     userDataUser.save(null, { useMasterKey: true });   
+ 
+	
+  
+  },
+	    
+	    
+
+   error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+		});
+		
+	
+		   
+	 
+		
+		   
+    
+     
+      
+  
+	   }
+	   
+	
+    
+   }else  if (bonusThisRound === 2){
+    
+    
+    var playersInThisRound = userDataUser.get(currentRoundPlayer); 
+	   if (playersInThisRound.length === 0 ){
+		   console.log('Round1 is Zero');
+		    
+		    userDataUser.save(null, { useMasterKey: true });
+	   }else{
+	
+ var confirmationRounds = userDataUser.get('ConfirmRound');
+   
+     var queryPlayer = new Parse.Query('Player');
+  
+	console.log(playersInThisRound.length);
+		   
+	
+		queryPlayer.containedIn('Name',playersInThisRound);
+		
+	   
+		
+		queryPlayer.find({
+  success: function(results2) {
+ 
+   var totalScore = totalScoreRound;
+	  
+   for (var i = 0; i < results2.length; i++) {
+  
+    var userData2 = results2[i];
+    var namePlayer = userData2.get('Name');
+    var playerScore = userData2.get(currentRound);
+    if(namePlayer === playersInThisRound[0]){
+        playerScore = playerScore * 1.2;
+	    
+    }
+	
+	if(namePlayer === playersInThisRound[1]){
+        playerScore = playerScore * 1.2;
+	    
+    }
+	
+	
+	
+    totalScore = totalScore + playerScore;
+	   console.log('Tout est possible' + totalScore);
+    
+	    console.log('player Is ' + namePlayer + ' and score is ' + playerScore);
+    
+		
+	 
+	   
+    totalScoreRound = totalScore;
+	   console.log(totalScoreRound +' ZIZOUUUU');
+    
+    
+     
+   }
+	  
+	  
+	   	    console.log('Ok boys its ' + totalScoreRound);
+	    if(confirmationRounds[currentNumber] === 1){
+		  totalScoreRound = totalScoreRound + 5;
+	  }
+	  totalScoreRound = (totalScoreRound.toFixed(2))/1;
+	   historyRounds[currentNumber] = totalScoreRound;
+      userDataUser.set('LastScore',totalScoreRound);
+     
+	  var parsetotalScore = 0;
+	    for (var k = 0; k < historyRounds.length; k++) {
+		    parsetotalScore += historyRounds[k];
+	    }
+	  
+	  parsetotalScore = (parsetotalScore.toFixed(2))/1;
+     
+      userDataUser.set('TotalScore',parsetotalScore);
+      userDataUser.set('HistoryRoundScore',historyRounds);
+	  
+	  
+      
+       
+	  
+	    
+   
+     userDataUser.save(null, { useMasterKey: true });   
+ 
+	
+  
+  },
+	    
+	    
+
+   error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+		});
+		
+	
+		   
+	 
+		
+		   
+    
+     
+      
+  
+	   }
+	   
+	
+    
+   }else  if (bonusThisRound === 3){
+    
+    
+    var playersInThisRound = userDataUser.get(currentRoundPlayer); 
+	   if (playersInThisRound.length === 0 ){
+		   console.log('Round1 is Zero');
+		    
+		    userDataUser.save(null, { useMasterKey: true });
+	   }else{
+	
+ var confirmationRounds = userDataUser.get('ConfirmRound');
+   
+     var queryPlayer = new Parse.Query('Player');
+  
+	console.log(playersInThisRound.length);
+		   
+	
+		queryPlayer.containedIn('Name',playersInThisRound);
+		
+	   
+		
+		queryPlayer.find({
+  success: function(results2) {
+ 
+   var totalScore = totalScoreRound;
+	 var maxScore = 0;
+	 var maxCounter = 0;
+   for (var i = 0; i < results2.length; i++) {
+  
+    var userData2 = results2[i];
+    var namePlayer = userData2.get('Name');
+    var playerScore = userData2.get(currentRound);
+	
+	
+	
+	if (namePlayer === playersInThisRound[0] || namePlayer === playersInThisRound[1] || namePlayer === playersInThisRound[2] || namePlayer === playersInThisRound[3] || namePlayer === playersInThisRound[4]){
+		  if(namePlayer === playersInThisRound[0]){
+        playerScore = playerScore * 1.2;
+	    
+    }
+	
+	
+	
+	
+	
+    totalScore = totalScore + playerScore;
+	}else{
+		maxCounter = maxCounter + 1;
+		if(maxScore < playerScore){
+			maxScore = playerScore;
+		}
+		
+		if(maxCounter === 3){
+			 totalScore = totalScore + maxScore;
+		}
+		
+		
+	}
+	
+  
+	   console.log('Tout est possible' + totalScore);
+    
+	    console.log('player Is ' + namePlayer + ' and score is ' + playerScore);
+    
+		
+	 
+	   
+    totalScoreRound = totalScore;
+	   console.log(totalScoreRound +' ZIZOUUUU');
+    
+    
+     
+   }
+	  
+	  
+	   	    console.log('Ok boys its ' + totalScoreRound);
+	    if(confirmationRounds[currentNumber] === 1){
+		  totalScoreRound = totalScoreRound + 5;
+	  }
+	  totalScoreRound = (totalScoreRound.toFixed(2))/1;
+	   historyRounds[currentNumber] = totalScoreRound;
+      userDataUser.set('LastScore',totalScoreRound);
+     
+	  var parsetotalScore = 0;
+	    for (var k = 0; k < historyRounds.length; k++) {
+		    parsetotalScore += historyRounds[k];
+	    }
+	  
+	  parsetotalScore = (parsetotalScore.toFixed(2))/1;
+     
+      userDataUser.set('TotalScore',parsetotalScore);
+      userDataUser.set('HistoryRoundScore',historyRounds);
+	  
+	  
+      
+       
+	  
+	    
+   
+     userDataUser.save(null, { useMasterKey: true });   
+ 
+	
+  
+  },
+	    
+	    
+
+   error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+		});
+		
+	
+		   
+	 
+		
+		   
+    
+     
+      
+  
+	   }
+	   
+	
+    
+   }else  if (bonusThisRound === 4){
+    
+    
+    var playersInThisRound = userDataUser.get(currentRoundPlayer); 
+	   if (playersInThisRound.length === 0 ){
+		   console.log('Round1 is Zero');
+		    
+		    userDataUser.save(null, { useMasterKey: true });
+	   }else{
+	
+ var confirmationRounds = userDataUser.get('ConfirmRound');
+   
+     var queryPlayer = new Parse.Query('Player');
+  
+	console.log(playersInThisRound.length);
+		   
+	
+		queryPlayer.containedIn('Name',playersInThisRound);
+		
+	   
+		
+		queryPlayer.find({
+  success: function(results2) {
+ 
+   var totalScore = totalScoreRound;
+	 var maxScore = 0;
+	 var maxCounter = 0;
+   for (var i = 0; i < results2.length; i++) {
+  
+    var userData2 = results2[i];
+    var namePlayer = userData2.get('Name');
+    var playerScore = userData2.get(currentRound);
+	
+	
+	
+	
+		
+        playerScore = playerScore * 1.2;
+	    
+    
+	
+	
+	
+	
+	
+    totalScore = totalScore + playerScore;
+	
+  
+	   console.log('Tout est possible' + totalScore);
+    
+	    console.log('player Is ' + namePlayer + ' and score is ' + playerScore);
+    
+		
+	 
+	   
+    totalScoreRound = totalScore;
+	   console.log(totalScoreRound +' ZIZOUUUU');
+    
+    
+     
+   }
+	  
+	  
+	   	    console.log('Ok boys its ' + totalScoreRound);
+	    if(confirmationRounds[currentNumber] === 1){
+		  totalScoreRound = totalScoreRound + 5;
+	  }
+	  totalScoreRound = (totalScoreRound.toFixed(2))/1;
+	   historyRounds[currentNumber] = totalScoreRound;
+      userDataUser.set('LastScore',totalScoreRound);
+     
+	  var parsetotalScore = 0;
+	    for (var k = 0; k < historyRounds.length; k++) {
+		    parsetotalScore += historyRounds[k];
+	    }
+	  
+	  parsetotalScore = (parsetotalScore.toFixed(2))/1;
+     
+      userDataUser.set('TotalScore',parsetotalScore);
+      userDataUser.set('HistoryRoundScore',historyRounds);
+	  
+	  
+      
+       
+	  
+	    
+   
+     userDataUser.save(null, { useMasterKey: true });   
+ 
+	
+  
+  },
+	    
+	    
+
+   error: function(error) {
+    // error is an instance of Parse.Error.
+  }
+		});
+		
+	
+		   
+	 
+		
+		   
+    
+     
+      
+  
+	   }
+	   
+	
+    
+   }
+	   
+	  
+		},
+
+  error: function(error) {
+    // error is an instance of Parse.Error.
+		}
+		});
+	   
+	   
+	  
+  
+   
+  
+   
+     
+  
+
+ 
+   }
+  
+     
+   
+	   res.success(counter);  
+  
+  },
+	  
+	  
+
+   function(error) {
+    // error is an instance of Parse.Error.
+  }); 
+});
+
 
 Parse.Cloud.define('resetArrayNormal', function(req, res) {
  
