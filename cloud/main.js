@@ -579,6 +579,11 @@ Parse.Cloud.define('computeScoreRoundTrue', function(req, res) {
     var playersInThisRound = userDataUser.get(currentRoundPlayer); 
 	   if (playersInThisRound.length === 0 ){
 		   console.log('Round1 is Zero');
+		   
+		    historyRounds[currentNumber] = 0;
+                    userDataUser.set('LastScore',0);
+		  
+                    userDataUser.set('HistoryRoundScore',historyRounds);
 		    
 		    userDataUser.save(null, { useMasterKey: true });
 	   }else{
