@@ -74,7 +74,7 @@
     "prepublish": "npm run build"
   },
   "engines": {
-     "node": ">=4.3 <7.0",
+     "node": "4.5.0",
     "npm": ">=1.0.0"
   },
   "bin": {
