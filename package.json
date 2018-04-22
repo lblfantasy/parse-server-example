@@ -76,7 +76,7 @@
     "prepublish": "npm run build"
   },
   "engines": {
-    "node": ">=4.5"
+    "node": "8.9.x"
   },
 
   "optionalDependencies": {
